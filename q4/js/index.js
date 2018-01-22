@@ -202,7 +202,9 @@ function heroHeal(){
   },1100);
 }
 
+var entered = true;
 function finish(){
+  entered = false;
   var dialog = document.getElementById("dialog");
   dialog.style.display = "block";
   if (monster.alive == false){
@@ -229,13 +231,22 @@ function addSkillEvent(){
 
 document.onkeyup = function(enent){
   var key = String.fromCharCode(event.keyCode);
-  if (key == "A"){
-    heroAttack();
+  if (entered){
+    entered = !entered; //entered = false
+    if (key == "A"){
+      heroAttack();
+    }
+    else if(key == "D"){
+      heroHeal();
+    }
+    setTimeout(function(){
+      entered = !entered;
+    },1600);
   }
-  else if(key == "D"){
-    heroHeal();
-  }
+  
 }
+
+
 
 var hero = new Hero("Bernard", 130, 30);
 var monster = new Monster("Skeleton", 130, 40);
