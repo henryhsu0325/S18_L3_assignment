@@ -10,6 +10,7 @@ class BaseCharacter{
   getHurt(damage){
     this.hp -= damage;
     if (this.hp <= 0){
+      this.hp = 0;
       this.die()
     }
 
@@ -71,7 +72,7 @@ class Hero extends BaseCharacter{
   attack(character){
     var damage = Math.random()*(this.ap/2)+(this.ap/2);
     super.attack(character, Math.round(damage));
-    console.log("hero.attack");
+    // console.log("hero.attack");
   }
 
   getHurt(damage) {
@@ -169,17 +170,19 @@ function heroAttack(){
         else{
           document.getElementsByClassName("skill-block")[0].style.display = "block";
         }
+      entered = !entered;
       },500);
     }
     else{
       finish();
     }
   },1100);
+
 }
 
 function heroHeal(){
   document.getElementsByClassName("skill-block")[0].style.display = "none";
-  console.log("heal image disapear")
+  // console.log("heal image disapear")
   setTimeout(function(){
     setTimeout(function(){
       hero.heal();
@@ -198,13 +201,17 @@ function heroHeal(){
       else{
         document.getElementsByClassName("skill-block")[0].style.display = "block";
       }
+      // console.log(entered + "after finish");
+    entered = !entered;
     },500);
   },1100);
 }
 
 var entered = true;
 function finish(){
-  entered = false;
+  // console.log(entered + "finish");
+  // entered = !entered; 
+  entered = true;
   var dialog = document.getElementById("dialog");
   dialog.style.display = "block";
   if (monster.alive == false){
@@ -235,13 +242,15 @@ document.onkeyup = function(enent){
     entered = !entered; //entered = false
     if (key == "A"){
       heroAttack();
+      // entered = !entered;
     }
     else if(key == "D"){
       heroHeal();
+      // entered = !entered;
     }
-    setTimeout(function(){
-      entered = !entered;
-    },1600);
+    // setTimeout(function(){
+    //   entered = !entered;
+    // },1600);
   }
   
 }
