@@ -81,10 +81,12 @@ class Hero extends BaseCharacter{
   }
 
   heal(){
+    var healing = 30;
     if (this.maxHp - this.hp > 30){
       this.hp+=30;
     }
     else{
+      healing = this.maxHp-this.hp;
       this.hp = this.maxHp;
     }
     this.updateHtml(this.hpElement, this.hurtElement);
@@ -96,7 +98,7 @@ class Hero extends BaseCharacter{
       if (i == 1){
         _this.element.getElementsByClassName("effect-image")[0].style.display = "block";
         _this.element.getElementsByClassName("heal-text")[0].classList.add("healed");
-        _this.element.getElementsByClassName("heal-text")[0].textContent = "30";
+        _this.element.getElementsByClassName("heal-text")[0].textContent = healing;
       }
 
       _this.element.getElementsByClassName("effect-image")[0].src = "img/effect/heal/" +i+".png";
